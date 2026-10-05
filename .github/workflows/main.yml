@@ -1,0 +1,29 @@
+name: web-CI/CD-practice
+
+on:
+    push:
+        branches: ["master"]
+
+jobs:
+    build:
+        runs-on: ubuntu-latest
+        steps:
+            #GitHubリポジトリの中身をRunner(一時的な実行環境)へ取得
+            - uses: actions/checkout@v4 
+            
+            #Runner環境にJDK17を準備する
+            - name: Set up JDK17
+              uses: actions/setup-java@v4
+              with:
+                java-version: '17'
+                distribution: 'temurin' #JDKの配布元　エクリプス・テムリンという会社
+
+            #Gradleを使用してjavaプロジェクトをビルドする
+            - name: build with Gradle
+              run: ./gradlew build #Linux環境　./gradlew.batはWindows
+
+            #Dockerfileを使用してimageを作成する　--Docker build
+            - name: Docker build image
+              run: Docker build -t web-app:latest -f ./Dockerfile . #Dockerfileを指定したい時は-f(ファイル)をつけて指定する　最後はビルドコンテキスト
+            # run: Docker build -t web-app:latest . カレントディレクトリ配下にDockerfileが存在する場合は←でよい　ビルドコンテキストとカレントディレクトリDockerfileそれぞれの関係次第
+
