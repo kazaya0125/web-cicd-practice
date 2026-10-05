@@ -24,6 +24,6 @@ jobs:
 
             #Dockerfileを使用してimageを作成する　--Docker build
             - name: Docker build image
-              run: Docker build -t web-app:latest -f ./Dockerfile . #Dockerfileを指定したい時は-f(ファイル)をつけて指定する　最後はビルドコンテキスト
+              run: docker build -t web-app:latest -f ./Dockerfile . #Dockerfileを指定したい時は-f(ファイル)をつけて指定する　最後はビルドコンテキスト
             # run: Docker build -t web-app:latest . カレントディレクトリ配下にDockerfileが存在する場合は←でよい　ビルドコンテキストとカレントディレクトリDockerfileそれぞれの関係次第
 
