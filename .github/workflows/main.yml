@@ -55,3 +55,22 @@ jobs:
             #ECRへimageをpush
             - name: image push to ECR
               run: docker push 749185460978.dkr.ecr.ap-northeast-1.amazonaws.com/web-app:ver2
+
+            #ECSタスク定義のコンテナイメージを更新
+            - name: Render ECS task definition
+              id: render-task-definition
+              uses: aws-actions/amazon-ecs-render-task-definition@v1
+              with:
+                task-definition: task-definition.json
+                container-name: web-app
+                image: 749185460978.dkr.ecr.ap-northeast-1.amazonaws.com/web-app:ver2
+            
+            #ECSサービスへデプロイ
+            - name: Deploy to ECS
+              uses: aws-actions/amazon-ecs-deploy-task-definition@v2
+              with:
+                task-definition: ${{ steps.render-task-definition.outputs.task-definition }}
+                cluster: web-cicd-cluster
+                service: web-cicd-service
+                wait-for-service-stability: true
+              
