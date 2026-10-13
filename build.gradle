@@ -17,7 +17,7 @@ java {
 }
 
 war {
-    archiveFileName = 'app.war'
+    archiveFileName = 'user-management.war'
 }
 
 repositories {
