@@ -193,7 +193,7 @@ public class UserServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
 
-        String url = "jdbc:mariadb://simple-web-app-db.cdg0iegkyfrh.ap-northeast-1.rds.amazonaws.com:3306/auth_db";
+        String url = "jdbc:mariadb://web-cicd-db.cdg0iegkyfrh.ap-northeast-1.rds.amazonaws.com:3306/auth_db";
         String user = "admin";
         String password = "Password";
 
