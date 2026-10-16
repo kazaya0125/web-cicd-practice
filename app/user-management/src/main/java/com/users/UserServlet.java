@@ -20,7 +20,7 @@ public class UserServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
 
-        String url = "jdbc:mariadb://web-cicd-db.cdg0iegkyfrh.ap-northeast-1.rds.amazonaws.com:3306/auth_db?sslMode=verify-full";
+        String url = "jdbc:mariadb://web-cicd-db.cdg0iegkyfrh.ap-northeast-1.rds.amazonaws.com:3306/auth_db?sslMode=verify-full&serverSslCert=/usr/local/tomcat/conf/global-bundle.pem";
         String user = "admin";
         String password = "Password";
 
